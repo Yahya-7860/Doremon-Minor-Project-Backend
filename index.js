@@ -1,14 +1,11 @@
 require('dotenv').config()
 const express = require("express");
 const mongoose = require('mongoose');
+const { registerRouter } = require('./routes');
 const app = express();
 
 const PORT = process.env.PORT;
 const DB_STRING = process.env.DB_STRING;
-
-app.get('/', (req, res) => {
-    res.send("Server running")
-})
 
 const dbConnection = async () => {
     try {
@@ -18,7 +15,7 @@ const dbConnection = async () => {
         console.log("An error occured while connecting databse", error)
     }
 }
-
+dbConnection();
 app.listen(PORT, (err) => {
     if (err) {
         console.log(err)
@@ -27,3 +24,6 @@ app.listen(PORT, (err) => {
         console.log(`Server started running on port ${PORT}`)
     }
 })
+
+app.use(express.json())
+app.use('/user', registerRouter)
