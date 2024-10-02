@@ -1,8 +1,9 @@
 require('dotenv').config()
 const express = require("express");
+const app = express();
 const mongoose = require('mongoose');
 const { registerRouter } = require('./routes');
-const app = express();
+const { hashedPassword } = require("./middleware")
 
 const PORT = process.env.PORT;
 const DB_STRING = process.env.DB_STRING;
@@ -26,4 +27,4 @@ app.listen(PORT, (err) => {
 })
 
 app.use(express.json())
-app.use('/user', registerRouter)
+app.use('/user', hashedPassword, registerRouter)

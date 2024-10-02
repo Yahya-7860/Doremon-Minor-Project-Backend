@@ -12,8 +12,12 @@ const hanldeUserRegister = async (req, res) => {
         res.status(200).json({ message: "User Registered", addedUser })
     }
     catch (error) {
-        console.log(error)
-        res.status(500).json({ error })
+        if (error.code === 11000) {
+            res.status(400).json({ message: "user already exist" })
+        }
+        else {
+            res.status(500).json({ error })
+        }
     }
 }
 
