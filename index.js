@@ -27,5 +27,5 @@ app.listen(PORT, (err) => {
 })
 
 app.use(express.json())
-app.use('/user', hashedPassword, registerRouter)
 app.use('/user', loginRouter)
+app.use('/user', hashedPassword, registerRouter)

@@ -16,4 +16,4 @@ const hashedPassword = async (req, res, next) => {
     }
 }
 
-module.exports = hashedPassword
+module.exports = hashedPassword;

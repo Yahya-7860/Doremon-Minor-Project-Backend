@@ -13,7 +13,9 @@ const handleUserLogin = async (req, res) => {
         if (!dbUser) {
             return res.status(404).json({ message: "user not found" })
         }
-        const isPasswordMatched = await bcrypt.compare(password, dbUser.password)
+        // console.log(dbUser.password)
+        const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
+        // console.log("user entered password is " + password)
         if (!isPasswordMatched) {
             return res.status(401).json({ message: "incorrect password" })
         }
