@@ -2,22 +2,22 @@ const mongoose = require("mongoose");
 const { userModel } = require("../../model");
 const jwt = require('jsonwebtoken');
 
-const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
-const hanldeUserRegister = async (req, res) => {
+const handleUserRegister = async (req, res) => {
     const { username, password } = req.body;
     if (!username || !password) {
-        return res.status(400).json({ message: "username and password can be empty." })
+        return res.status(400).json({ message: "username and password can't be empty." })
     }
 
     try {
         const addedUser = await userModel.create({ username: username, password: password })
+        const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
         const payload = {
             userId: addedUser._id,
         }
         const token = jwt.sign(payload, JWT_SECRET_KEY)
         addedUser.token = token;
-        addedUser.save();
+        await addedUser.save();
         res.status(200).json({ message: "User Registered", addedUser, token })
 
     }
@@ -31,4 +31,4 @@ const hanldeUserRegister = async (req, res) => {
     }
 }
 
-module.exports = hanldeUserRegister;
+module.exports = handleUserRegister;

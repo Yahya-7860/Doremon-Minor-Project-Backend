@@ -1,3 +1,4 @@
-const hanldeUserRegister = require('./Register')
+const handleUserRegister = require('./Register')
+const handleUserLogin = require('./Login')
 
-module.exports = { hanldeUserRegister }
+module.exports = { handleUserRegister, handleUserLogin }
