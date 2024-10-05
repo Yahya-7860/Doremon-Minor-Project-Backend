@@ -1,5 +1,8 @@
-const mongoose = require("mongoose")
-const { userModel } = require("../../model")
+const mongoose = require("mongoose");
+const { userModel } = require("../../model");
+const jwt = require('jsonwebtoken');
+
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
 
 const hanldeUserRegister = async (req, res) => {
     const { username, password } = req.body;
@@ -9,7 +12,14 @@ const hanldeUserRegister = async (req, res) => {
 
     try {
         const addedUser = await userModel.create({ username: username, password: password })
-        res.status(200).json({ message: "User Registered", addedUser })
+        const payload = {
+            userId: addedUser._id,
+        }
+        const token = jwt.sign(payload, JWT_SECRET_KEY)
+        addedUser.token = token;
+        addedUser.save();
+        res.status(200).json({ message: "User Registered", addedUser, token })
+
     }
     catch (error) {
         if (error.code === 11000) {
