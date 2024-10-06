@@ -2,8 +2,8 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const { registerRouter, loginRouter } = require('./routes');
-const { hashedPassword } = require("./middleware")
+const { registerRouter, loginRouter, scoreRouter } = require('./routes');
+const { hashedPassword, jwtAuthentication } = require("./middleware")
 
 const PORT = process.env.PORT;
 const DB_STRING = process.env.DB_STRING;
@@ -29,3 +29,4 @@ app.listen(PORT, (err) => {
 app.use(express.json())
 app.use('/user', loginRouter)
 app.use('/user', hashedPassword, registerRouter)
+app.use('/player', jwtAuthentication, scoreRouter)
