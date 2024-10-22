@@ -25,7 +25,7 @@ app.listen(PORT, (err) => {
         console.log(`Server started running on port ${PORT}`)
     }
 })
-
+//working fine in Postman
 app.use(express.json())
 app.use('/user', loginRouter)
 app.use('/user', hashedPassword, registerRouter)
