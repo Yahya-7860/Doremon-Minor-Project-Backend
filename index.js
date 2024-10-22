@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const { registerRouter, loginRouter, scoreRouter, getScoreRouter } = require('./routes');
+const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter } = require('./routes');
 const { hashedPassword, jwtAuthentication } = require("./middleware")
 
 const PORT = process.env.PORT;
@@ -30,4 +30,5 @@ app.use(express.json())
 app.use('/user', loginRouter)
 app.use('/user', hashedPassword, registerRouter)
 app.use('/player', jwtAuthentication, scoreRouter)
-app.use('/player', jwtAuthentication, getScoreRouter)
+app.use('/player', jwtAuthentication, getOneScoreRouter)
+app.use('/player', jwtAuthentication, allScoreRouter)
