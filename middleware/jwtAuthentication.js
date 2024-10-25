@@ -11,7 +11,6 @@ const jwtAuthentication = (req, res, next) => {
     try {
         const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
         const decodedUser = jwt.verify(token, JWT_SECRET_KEY);
-        // console.log(decodedUser.userId)
         req.playerid = decodedUser.userId;
         next();
     } catch (error) {

@@ -2,7 +2,7 @@ require('dotenv').config()
 const express = require("express");
 const app = express();
 const mongoose = require('mongoose');
-const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter } = require('./routes');
+const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter, deletePlayerRouter } = require('./routes');
 const { hashedPassword, jwtAuthentication } = require("./middleware")
 
 const PORT = process.env.PORT;
@@ -25,10 +25,10 @@ app.listen(PORT, (err) => {
         console.log(`Server started running on port ${PORT}`)
     }
 })
-//working fine in Postman
 app.use(express.json())
 app.use('/user', loginRouter)
 app.use('/user', hashedPassword, registerRouter)
 app.use('/player', jwtAuthentication, scoreRouter)
 app.use('/player', jwtAuthentication, getOneScoreRouter)
 app.use('/player', jwtAuthentication, allScoreRouter)
+app.use('/player', jwtAuthentication, deletePlayerRouter)
