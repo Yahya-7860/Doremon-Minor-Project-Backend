@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require("express");
+const cors = require('cors')
 const app = express();
 const mongoose = require('mongoose');
 const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter, deletePlayerRouter } = require('./routes');
@@ -26,6 +27,7 @@ app.listen(PORT, (err) => {
     }
 })
 app.use(express.json())
+app.use(cors())
 app.use('/user', loginRouter)
 app.use('/user', hashedPassword, registerRouter)
 app.use('/player', jwtAuthentication, scoreRouter)

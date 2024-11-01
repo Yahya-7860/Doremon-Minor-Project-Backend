@@ -1,6 +1,6 @@
 const loginRouter = require('express').Router();
 const { handleUserLogin } = require('../controller/auth');
 
-loginRouter.get('/login', handleUserLogin);
+loginRouter.post('/login', handleUserLogin);
 
 module.exports = { loginRouter }

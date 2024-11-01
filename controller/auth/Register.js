@@ -22,10 +22,10 @@ const handleUserRegister = async (req, res) => {
     }
     catch (error) {
         if (error.code === 11000) {
-            res.status(400).json({ message: "user already exist" })
+            return res.status(400).json({ message: "exist" })
         }
         else {
-            res.status(500).json({ error })
+            return res.status(500).json({ error })
         }
     }
 }

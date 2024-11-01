@@ -11,11 +11,11 @@ const handleUserLogin = async (req, res) => {
     try {
         const dbUser = await userModel.findOne({ username });
         if (!dbUser) {
-            return res.status(404).json({ message: "user not found" })
+            return res.status(404).json({ message: "invalid user" })
         }
         const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
         if (!isPasswordMatched) {
-            return res.status(401).json({ message: "incorrect password" })
+            return res.status(401).json({ message: "invalid password" })
         }
 
         const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY;
