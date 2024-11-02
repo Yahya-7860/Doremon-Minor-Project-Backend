@@ -4,10 +4,9 @@ const handleScore = async (req, res) => {
     const { score } = req.body;
 
     try {
-        // console.log(req.playerid)
         const scoreByPlyerId = await playerScoreModel.findOne({ playerId: req.playerid })
         if (!scoreByPlyerId) {
-            const newScoreChart = await playerScoreModel.create({ score, playerId: req.playerid })
+            const newScoreChart = await playerScoreModel.create({ playerId: req.playerid, score: score })
             if (!newScoreChart) {
                 return res.status(401).json({ message: `unable to create score chart` })
             }

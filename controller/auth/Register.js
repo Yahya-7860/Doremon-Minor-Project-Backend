@@ -15,9 +15,10 @@ const handleUserRegister = async (req, res) => {
             userId: addedUser._id,
         }
         const token = jwt.sign(payload, JWT_SECRET_KEY)
+        const userId = addedUser._id;
         addedUser.token = token;
         await addedUser.save();
-        res.status(200).json({ message: "User Registered", addedUser, token })
+        res.status(200).json({ message: "User Registered", addedUser, token, userId })
 
     }
     catch (error) {

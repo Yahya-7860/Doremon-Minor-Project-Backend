@@ -2,13 +2,12 @@ const { playerScoreModel } = require("../../model")
 
 const handleGetOneScore = async (req, res) => {
     const playerid = req.params.playerid
-    // console.log(playerid)
     try {
         const OneScore = await playerScoreModel.findOne({ playerId: playerid })
         if (!OneScore) {
-            return res.status(404).json({ message: "score not found" })
+            const score = 0;
+            return res.status(200).json({ message: "score not found", score })
         }
-        // console.log(OneScore)
         const score = OneScore.score;
         res.status(200).json({ message: "score found", score })
     } catch (error) {

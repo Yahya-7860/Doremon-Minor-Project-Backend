@@ -24,10 +24,12 @@ const handleUserLogin = async (req, res) => {
         }
         const token = jwt.sign(payload, JWT_SECRET_KEY);
         const userId = dbUser._id;
-        res.status(200).json({ message: "User found", token, userId })
+        // console.log(dbUser.username)
+        const profileName = dbUser.username;
+        res.status(200).json({ message: "User found", token, userId, profileName })
 
     } catch (error) {
-        res.status(401).json({ message: "Authentication Failed", error })
+        res.status(500).json({ message: "server error", error })
     }
 }
 
