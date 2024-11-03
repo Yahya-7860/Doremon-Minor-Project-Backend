@@ -16,9 +16,10 @@ const handleUserRegister = async (req, res) => {
         }
         const token = jwt.sign(payload, JWT_SECRET_KEY)
         const userId = addedUser._id;
+        const PlayerName = addedUser.username;
         addedUser.token = token;
         await addedUser.save();
-        res.status(200).json({ message: "User Registered", addedUser, token, userId })
+        res.status(200).json({ message: "User Registered", addedUser, token, userId, PlayerName })
 
     }
     catch (error) {

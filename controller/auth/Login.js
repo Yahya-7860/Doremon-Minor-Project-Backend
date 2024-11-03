@@ -24,9 +24,8 @@ const handleUserLogin = async (req, res) => {
         }
         const token = jwt.sign(payload, JWT_SECRET_KEY);
         const userId = dbUser._id;
-        // console.log(dbUser.username)
-        const profileName = dbUser.username;
-        res.status(200).json({ message: "User found", token, userId, profileName })
+        const PlayerName = dbUser.username;
+        res.status(200).json({ message: "User found", token, userId, PlayerName })
 
     } catch (error) {
         res.status(500).json({ message: "server error", error })
