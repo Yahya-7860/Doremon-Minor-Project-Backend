@@ -2,7 +2,7 @@ const { playerScoreModel } = require("../../model")
 
 const handleGetAllScore = async (req, res) => {
     try {
-        const allScores = await playerScoreModel.find()
+        const allScores = await playerScoreModel.find().sort({ score: -1 })
         if (!allScores) {
             return res.status(404).json({ message: "No Scores Found" })
         }

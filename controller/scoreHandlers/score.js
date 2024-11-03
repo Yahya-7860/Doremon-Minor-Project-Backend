@@ -1,12 +1,12 @@
 const { playerScoreModel } = require('../../model')
 
 const handleScore = async (req, res) => {
-    const { score } = req.body;
+    const { score, username } = req.body;
 
     try {
         const scoreByPlyerId = await playerScoreModel.findOne({ playerId: req.playerid })
         if (!scoreByPlyerId) {
-            const newScoreChart = await playerScoreModel.create({ playerId: req.playerid, score: score })
+            const newScoreChart = await playerScoreModel.create({ playerId: req.playerid, score: score, username: username })
             if (!newScoreChart) {
                 return res.status(401).json({ message: `unable to create score chart` })
             }

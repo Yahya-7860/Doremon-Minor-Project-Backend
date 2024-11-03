@@ -1,13 +1,16 @@
 const mongoose = require('mongoose')
 
 const playerScoreSchema = new mongoose.Schema({
-    playerId: {
-        type: String,
-    },
     score: {
         type: Number,
         required: true,
     },
+    playerId: {
+        type: String,
+    },
+    username: {
+        type: String
+    }
 })
 
 const playerScoreModel = mongoose.model('PlayerScore', playerScoreSchema);
