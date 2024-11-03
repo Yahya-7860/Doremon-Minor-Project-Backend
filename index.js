@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require('cors')
 const app = express();
 const mongoose = require('mongoose');
-const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter, deletePlayerRouter } = require('./routes');
+const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter, deletePlayerRouter, deletePlayerScoreChartRouter } = require('./routes');
 const { hashedPassword, jwtAuthentication } = require("./middleware")
 
 const PORT = process.env.PORT;
@@ -34,3 +34,4 @@ app.use('/player', jwtAuthentication, scoreRouter)
 app.use('/player', jwtAuthentication, getOneScoreRouter)
 app.use('/player', jwtAuthentication, allScoreRouter)
 app.use('/player', jwtAuthentication, deletePlayerRouter)
+app.use('/score', jwtAuthentication, deletePlayerScoreChartRouter)
