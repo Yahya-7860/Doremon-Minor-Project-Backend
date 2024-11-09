@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const { registerRouter, loginRouter, scoreRouter, getOneScoreRouter, allScoreRouter, deletePlayerRouter, deletePlayerScoreChartRouter } = require('./routes');
 const { hashedPassword, jwtAuthentication } = require("./middleware")
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 const DB_STRING = process.env.DB_STRING;
 
 const dbConnection = async () => {
